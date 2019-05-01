@@ -1,0 +1,28 @@
+{
+  "Id": 0,
+  "Nodes": [
+    {
+      "node": [
+        [
+          {
+            "node": [
+              [
+                {
+                  "value": " GRT(AI_RAW_TMP.PV,AI_RAW_TMP.LSP) "
+                }
+              ],
+              [
+                {
+                  "value": " XIO(AI_RAW_TMP.LEN)"
+                }
+              ]
+            ]
+          }
+        ],
+        {
+          "value": " TOF(AI_RAW_TMP.LTMROFF,?,?) TON(AI_RAW_TMP.LTMRON,?,?)"
+        }
+      ]
+    }
+  ]
+}

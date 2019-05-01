@@ -1,0 +1,28 @@
+{
+  "Id": 0,
+  "Nodes": [
+    {
+      "node": [
+        {
+          "value": " AnalogIn(PIT_502,Rack_6:1:I.Ch5Data,PIT_502_ALMA.HHLimit,PIT_502_ALMA.HLimit,PIT_502_ALMA.LLimit,PIT_502_ALMA.LLLimit,Rack_6:1:I.Ch5Fault,B3[10].14,PIT_502_string,Rack_6_1_Running) "
+        },
+        [
+          {
+            "node": [
+              [
+                {
+                  "value": "XIC(PIT_502.FLT) OTE(PIT_502_ALMA.InFault) "
+                }
+              ],
+              [
+                {
+                  "value": " ALMA(PIT_502_ALMA,PIT_502.PV,B3[10].14,PIT_502_ALMA.ProgDisable,PIT_502_ALMA.ProgEnable)"
+                }
+              ]
+            ]
+          }
+        ]
+      ]
+    }
+  ]
+}

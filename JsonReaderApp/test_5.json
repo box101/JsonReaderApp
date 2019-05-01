@@ -1,0 +1,31 @@
+{
+  "Id": 0,
+  "Nodes": [
+    {
+      "node": [
+        {
+          "value": " XIC(B3[0].0) XIC(B3[2].3) XIC(_LSHH_221.State) "
+        },
+        [
+          {
+            "node": [
+              [
+                {
+                  "value": "XIC(_XY_200) "
+                }
+              ],
+              [
+                {
+                  "value": " XIC(B3[10].14)"
+                }
+              ]
+            ]
+          }
+        ],
+        {
+          "value": " OTE(_XY_200)"
+        }
+      ]
+    }
+  ]
+}
