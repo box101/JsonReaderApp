@@ -17,15 +17,16 @@
         /// <returns>Список кортежей (Значение, Локация, JPath)</returns>
         public static List<(string Value, string Location, string JPath)> GetDocumentValuesWithLocations(string json)
         {
-            return GetValues(json).Select(value => (value.ToString().Trim(), CalcLocationFromJPath(value.Path), value.Path)).ToList();
+            return GetValues(json).Select(value => (value.ToString().Trim(), CalcLocationFromJPath(value), value.Path)).ToList();
         }
 
         /// <summary>
         /// Расчёт местоположение величины "value" в структуре json-документа
         /// </summary>
         /// <param name="path">JPath-путь</param>
-        private static string CalcLocationFromJPath(string path)
+        private static string CalcLocationFromJPath(JToken value)
         {
+            var path = value.Path;
             var stringBuilder = new StringBuilder();
             var matches       = Regex.Matches(path, @"node(\[(?<idx>\d+)\])+").ToArray();
 
@@ -47,12 +48,12 @@
                 {
                     ++cIdx;
                     stringBuilder.Append("-");
-                    stringBuilder.Append(mIdx == matches.Length && cIdx == captures.Length ? "P" : "D");
+                    stringBuilder.Append(captures.Length == 3 && cIdx == 2 ||  mIdx == matches.Length && cIdx == captures.Length ? "P" : "D");
                     stringBuilder.Append(c.Value);
                 }
             }
 
-            return stringBuilder.ToString();
+            return stringBuilder.Replace("D0-D0","D0").ToString();
         }
 
 

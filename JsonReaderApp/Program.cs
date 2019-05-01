@@ -9,8 +9,10 @@
     {
         static void Main()
         {
+            Console.WindowWidth += Console.WindowWidth / 8;
+
             var errorCounter = 0;
-            const int testCount = 6;
+            const int testCount = 7;
 
             for (var testNumber = 1; testNumber <= testCount; testNumber++)
             {
@@ -26,8 +28,9 @@
                     WriteLine(ConsoleColor.DarkRed, $"Test data records count: {testData.Count}. Parsed values count: {values.Count()}");
                 }
 
-                Console.WriteLine($"{"    JPath", -44} - {"Expected value",18} - {"Calculated value", 18}");
-                Console.WriteLine("--------------------------------------------------------------------------------------");
+                //Console.WriteLine($"{"    JPath", -44} - {"Expected location",18} - {"Calculated location", 22} - {"     Value", -30}");
+                Console.WriteLine($"{"    JPath", -44} - {"Expected location",18} - {"Calculated location", 22}");
+                Console.WriteLine("------------------------------------------------------------------------------------------------------------");
 
                 foreach (var (value, location, jPath) in values)
                 {
@@ -39,9 +42,13 @@
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                     }
                     
-                    Console.WriteLine($"{jPath, -44} - {expectedLocation,18} - {location, 18}");
+                    var path = jPath.Replace("Nodes[0].", "").Replace(".value", "").Replace("node", "n");
+                    //Console.WriteLine($"{path, -44} - {expectedLocation,18} - {location, 22} - {value.Substring(0, Math.Min(30, value.Length)), 30}");
+                    Console.WriteLine($"{path, -44} - {expectedLocation,18} - {location, 22}");
                     Console.ResetColor();
                 }
+
+                Console.WriteLine(json);
             }
 
             if (errorCounter == 0)
@@ -56,11 +63,6 @@
         /// <param name="testNumber">Номер тестового Json-документа</param>
         static (string Json, List<(string Value, string Location)> valuesWithLocaltion) GetTestData(int testNumber)
         {
-            if (testNumber < 1 || testNumber > 6)
-            {
-                throw new ArgumentOutOfRangeException(nameof(testNumber), testNumber, "value must be in 1..6");
-            }
-
             var testData = new [] {
                 new List<(string Value, string Location)>
                 {
@@ -112,6 +114,45 @@
                     ( "XIC(PIT_502.FLT)"                                                                          , "P1-D0-P0"  ),
                     ( "OTE(PIT_502_ALMA.InFault)"                                                                 , "P1-D0-P1"  ),
                     ( "ALMA(PIT_502_ALMA,PIT_502.PV,B3[10].14,PIT_502_ALMA.ProgDisable,PIT_502_ALMA.ProgEnable)"  , "P1-D1-P0"  ),
+                },
+                new List<(string Value, string Location)>
+                {
+                    ( "P0"      , "P0"        ),
+                    ( "P1"      , "P1"        ),
+                    ( "P2"      , "P2"        ),
+                    ( "P3-D0-P0", "P3-D0-P0"  ),
+                    ( "P3-D1-P0", "P3-D1-P0"  ),
+                    ( "P3-D1-P1", "P3-D1-P1"  ),
+                    ( "P3-D2-P0", "P3-D2-P0"  ),
+                    ( "P3-D2-P1-D0-P0", "P3-D2-P1-D0-P0"  ),
+                    ( "P3-D2-P1-D0-P1", "P3-D2-P1-D0-P1"  ),
+                    ( "P4"      , "P4"        ),
+                },
+                new List<(string Value, string Location)>
+                {
+                    ( "P0"      , "P0"        ),
+                    ( "P1"      , "P1"        ),
+                    ( "P2"      , "P2"        ),
+                    ( "P3-D0-P0", "P3-D0-P0"  ),
+                    ( "P3-D1-P0", "P3-D1-P0"  ),
+                    ( "P3-D1-P1", "P3-D1-P1"  ),
+                    ( "P3-D2-P0", "P3-D2-P0"  ),
+                    ( "P3-D2-P1-D0-P0", "P3-D2-P1-D0-P0"  ),
+                    ( "P3-D2-P1-D0-P1", "P3-D2-P1-D0-P1"  ),
+                    ( "P4"      , "P4"        ),
+                },
+                new List<(string Value, string Location)>
+                {
+                    ( "P0"      , "P0"        ),
+                    ( "P1"      , "P1"        ),
+                    ( "P2"      , "P2"        ),
+                    ( "P3-D0-P0", "P3-D0-P0"  ),
+                    ( "P3-D1-P0", "P3-D1-P0"  ),
+                    ( "P3-D1-P1", "P3-D1-P1"  ),
+                    ( "P3-D2-P0", "P3-D2-P0"  ),
+                    ( "P3-D2-P1-D0-P0", "P3-D2-P1-D0-P0"  ),
+                    ( "P3-D2-P1-D0-P1", "P3-D2-P1-D0-P1"  ),
+                    ( "P4"      , "P4"        ),
                 },
             };
                 
