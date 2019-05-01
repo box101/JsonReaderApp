@@ -14,7 +14,7 @@
             var errorCounter = 0;
             const int testCount = 7;
 
-            for (var testNumber = 7; testNumber <= testCount; testNumber++)
+            for (var testNumber = 1; testNumber <= testCount; testNumber++)
             {
                 var (json, testData) = GetTestData(testNumber);
 
@@ -28,8 +28,8 @@
                     WriteLine(ConsoleColor.DarkRed, $"Test data records count: {testData.Count}. Parsed values count: {values.Count()}");
                 }
 
-                Console.WriteLine($"{"    JPath", -44} - {"Expected location",26} - {"Calculated location", 26} - {"     Value", -30}");
-                Console.WriteLine("------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine($"{"    JPath", -44} - {"Expected location",26} - {"Calculated location", 26} - {"     Value    ", 40}");
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 foreach (var (value, location, jPath) in values)
                 {
@@ -42,7 +42,7 @@
                     }
                     
                     var path = jPath.Replace("Nodes[0].", "").Replace(".value", "").Replace("node", "n");
-                    Console.WriteLine($"{path, -44} - {expectedLocation,26} - {location, 26} - {value.Substring(0, Math.Min(30, value.Length)), 30}");
+                    Console.WriteLine($"{path, -44} - {expectedLocation,26} - {location, 26} - {value.Substring(0, Math.Min(37, value.Length)) + (value.Length > 37 ? "..." : ""), 40}");
                     Console.ResetColor();
                 }
             }
