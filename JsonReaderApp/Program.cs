@@ -9,12 +9,12 @@
     {
         static void Main()
         {
-            Console.WindowWidth += Console.WindowWidth / 8;
+            Console.WindowWidth += Console.WindowWidth / 4;
 
             var errorCounter = 0;
             const int testCount = 7;
 
-            for (var testNumber = 1; testNumber <= testCount; testNumber++)
+            for (var testNumber = 7; testNumber <= testCount; testNumber++)
             {
                 var (json, testData) = GetTestData(testNumber);
 
@@ -28,8 +28,7 @@
                     WriteLine(ConsoleColor.DarkRed, $"Test data records count: {testData.Count}. Parsed values count: {values.Count()}");
                 }
 
-                //Console.WriteLine($"{"    JPath", -44} - {"Expected location",18} - {"Calculated location", 22} - {"     Value", -30}");
-                Console.WriteLine($"{"    JPath", -44} - {"Expected location",18} - {"Calculated location", 22}");
+                Console.WriteLine($"{"    JPath", -44} - {"Expected location",26} - {"Calculated location", 26} - {"     Value", -30}");
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------");
 
                 foreach (var (value, location, jPath) in values)
@@ -43,12 +42,9 @@
                     }
                     
                     var path = jPath.Replace("Nodes[0].", "").Replace(".value", "").Replace("node", "n");
-                    //Console.WriteLine($"{path, -44} - {expectedLocation,18} - {location, 22} - {value.Substring(0, Math.Min(30, value.Length)), 30}");
-                    Console.WriteLine($"{path, -44} - {expectedLocation,18} - {location, 22}");
+                    Console.WriteLine($"{path, -44} - {expectedLocation,26} - {location, 26} - {value.Substring(0, Math.Min(30, value.Length)), 30}");
                     Console.ResetColor();
                 }
-
-                Console.WriteLine(json);
             }
 
             if (errorCounter == 0)
@@ -125,33 +121,8 @@
                     ( "P3-D1-P1", "P3-D1-P1"  ),
                     ( "P3-D2-P0", "P3-D2-P0"  ),
                     ( "P3-D2-P1-D0-P0", "P3-D2-P1-D0-P0"  ),
-                    ( "P3-D2-P1-D0-P1", "P3-D2-P1-D0-P1"  ),
-                    ( "P4"      , "P4"        ),
-                },
-                new List<(string Value, string Location)>
-                {
-                    ( "P0"      , "P0"        ),
-                    ( "P1"      , "P1"        ),
-                    ( "P2"      , "P2"        ),
-                    ( "P3-D0-P0", "P3-D0-P0"  ),
-                    ( "P3-D1-P0", "P3-D1-P0"  ),
-                    ( "P3-D1-P1", "P3-D1-P1"  ),
-                    ( "P3-D2-P0", "P3-D2-P0"  ),
-                    ( "P3-D2-P1-D0-P0", "P3-D2-P1-D0-P0"  ),
-                    ( "P3-D2-P1-D0-P1", "P3-D2-P1-D0-P1"  ),
-                    ( "P4"      , "P4"        ),
-                },
-                new List<(string Value, string Location)>
-                {
-                    ( "P0"      , "P0"        ),
-                    ( "P1"      , "P1"        ),
-                    ( "P2"      , "P2"        ),
-                    ( "P3-D0-P0", "P3-D0-P0"  ),
-                    ( "P3-D1-P0", "P3-D1-P0"  ),
-                    ( "P3-D1-P1", "P3-D1-P1"  ),
-                    ( "P3-D2-P0", "P3-D2-P0"  ),
-                    ( "P3-D2-P1-D0-P0", "P3-D2-P1-D0-P0"  ),
-                    ( "P3-D2-P1-D0-P1", "P3-D2-P1-D0-P1"  ),
+                    ( "P3-D2-P1-D0-P1-D0-P0", "P3-D2-P1-D0-P1-D0-P0"  ),
+                    ( "P3-D2-P1-D0-P2", "P3-D2-P1-D0-P2"  ),
                     ( "P4"      , "P4"        ),
                 },
             };

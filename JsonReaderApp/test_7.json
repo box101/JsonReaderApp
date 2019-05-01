@@ -23,7 +23,14 @@
                     "node": [
                       [
                         { "value": "P3-D2-P1-D0-P0" },
-                        { "value": "P3-D2-P1-D0-P1" }
+                        [
+                          {
+                            "node": [
+                              { "value": "P3-D2-P1-D0-P1-D0-P0" }
+                            ]
+                          }
+                        ],
+                        { "value": "P3-D2-P1-D0-P2" }
                       ]
                     ]
                   }
