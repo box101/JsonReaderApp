@@ -17,18 +17,17 @@
         /// <returns>Список кортежей (Значение, Локация, JPath)</returns>
         public static List<(string Value, string Location, string JPath)> GetDocumentValuesWithLocations(string json)
         {
-            return GetValues(json).Select(value => (value.ToString().Trim(), CalcLocationFromJPath(value), value.Path)).ToList();
+            return GetValues(json).Select(value => (value.ToString().Trim(), CalcLocationFromJsonPath(value.Path), value.Path)).ToList();
         }
 
         /// <summary>
-        /// Расчёт местоположение величины "value" в структуре json-документа
+        /// Расчёт местоположения величины "value" в структуре json-документа
         /// </summary>
-        /// <param name="path">JPath-путь</param>
-        private static string CalcLocationFromJPath(JToken value)
+        /// <param name="jsonPath">Путь в дереве json-документа</param>
+        private static string CalcLocationFromJsonPath(string jsonPath)
         {
-            var path = value.Path;
             var stringBuilder = new StringBuilder();
-            var matches       = Regex.Matches(path, @"node(\[(?<idx>\d+)\])+").ToArray();
+            var matches       = Regex.Matches(jsonPath, @"node(\[(?<idx>\d+)\])+").ToArray();
 
             var mIdx = 0;
             foreach (var m in matches)
@@ -58,7 +57,7 @@
 
 
         /// <summary>
-        /// Получить список объектоа со свойством "value" после разбивки каждого сложного объекта на множество простых <seealso cref="SplitValues"/>
+        /// Получить список объектов со свойством "value" после разбивки каждого сложного объекта на множество простых <seealso cref="SplitValues"/>
         /// </summary>
         /// <param name="inputJson">json-документ</param>
         /// <returns>массив JToken содержащих значение "value" и путь в дереве json-документа, из которого будет расчитано свойство Location</returns>
@@ -74,7 +73,7 @@
         /// Объект со свойством "value" может содержать значение со списком элементов
         /// Например объект со значением [ ... { "value": " TOF(AI_RAW_TMP.LTMROFF,?,?) TON(AI_RAW_TMP.LTMRON,?,?)"} ... ]
         /// эквивалентен тому, как если бы в массиве элементов было бы два объекта: [ ... { "value": " TOF(AI_RAW_TMP.LTMROFF,?,?)"}, { "value": " TON(AI_RAW_TMP.LTMRON,?,?)"	} ... ]
-        /// - Разбиваем такие объекты на множество простых.
+        /// Решение - разбиваем такие объекты на множество простых.
         /// </summary>
         private static void SplitValues(IEnumerable<JToken> values)
         {
